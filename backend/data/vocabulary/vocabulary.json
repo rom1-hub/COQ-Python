@@ -1,0 +1,106 @@
+[
+  {
+    "id": "alimentation",
+    "name": "Alimentación",
+    "subcategories": [
+      {
+        "id": "au-restaurant",
+        "name": "En el restaurante",
+        "items": [
+          {
+            "id": "addition",
+            "french": "addition",
+            "spanish": "cuenta",
+            "article_french": "l'",
+            "article_spanish": "la",
+            "emoji": "🧾"
+          },
+          {
+            "id": "serveur",
+            "french": "serveur",
+            "spanish": "camarero",
+            "article_french": "le",
+            "article_spanish": "el",
+            "emoji": "🧑‍🍳"
+          },
+          {
+            "id": "menu",
+            "french": "menu",
+            "spanish": "menú",
+            "article_french": "le",
+            "article_spanish": "el",
+            "emoji": "📋"
+          },
+          {
+            "id": "table",
+            "french": "table",
+            "spanish": "mesa",
+            "article_french": "la",
+            "article_spanish": "la",
+            "emoji": "🪑"
+          },
+          {
+            "id": "plat",
+            "french": "plat",
+            "spanish": "plato",
+            "article_french": "le",
+            "article_spanish": "el",
+            "emoji": "🍽️"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "animales",
+    "name": "Animales",
+    "subcategories": [
+      {
+        "id": "animales-domesticos",
+        "name": "Animales domésticos",
+        "items": [
+          {
+            "id": "chien",
+            "french": "chien",
+            "spanish": "perro",
+            "article_french": "un",
+            "article_spanish": "un",
+            "emoji": "🐕"
+          },
+          {
+            "id": "chat",
+            "french": "chat",
+            "spanish": "gato",
+            "article_french": "un",
+            "article_spanish": "un",
+            "emoji": "🐈"
+          },
+          {
+            "id": "oiseau",
+            "french": "oiseau",
+            "spanish": "pájaro",
+            "article_french": "un",
+            "article_spanish": "un",
+            "emoji": "🐦"
+          },
+          {
+            "id": "poisson",
+            "french": "poisson",
+            "spanish": "pez",
+            "article_french": "un",
+            "article_spanish": "un",
+            "emoji": "🐟"
+          },
+          {
+            "id": "lapin",
+            "french": "lapin",
+            "spanish": "conejo",
+            "article_french": "un",
+            "article_spanish": "un",
+            "emoji": "🐇"
+          }
+        ]
+      }
+    ]
+  }
+]

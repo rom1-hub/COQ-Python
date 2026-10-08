@@ -1,0 +1,77 @@
+/* COQ — Responsive de Conjugaison en móvil. */
+@import url("./conjugaison-mobile.css");
+
+/* Ajustes visuales de la consulta de conjugación. */
+.suggestions,
+.lookup-status{display:none!important}
+
+/* Escritorio: mantener el verbo separado de las acciones y compactar los botones. */
+@media (min-width:701px){
+  .verb-summary .conj-result-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+
+  .verb-summary .conj-result-head>div:first-child{
+    flex:1 1 auto;
+    min-width:0;
+  }
+
+  .verb-summary .conj-actions{
+    flex:0 0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+    max-width:58%;
+  }
+
+  .verb-summary .conj-actions .btn{
+    padding:8px 12px;
+    font-size:.9rem;
+    line-height:1.2;
+    white-space:nowrap;
+  }
+
+  .verb-summary #togglePronominal{
+    margin:0;
+  }
+}
+
+@media (max-width:700px){
+  /* El botón mantiene la organización vertical actual, pero con el mismo tamaño visual que las demás acciones. */
+  .verb-summary #togglePronominal{
+    padding:8px 12px;
+    font-size:.9rem;
+    line-height:1.2;
+  }
+
+  .result-modal{padding:10px;align-items:center}
+  .result-window{width:100%;max-width:100%;max-height:calc(100vh - 20px);padding:16px;border-radius:20px;overflow-y:auto;overflow-x:hidden}
+  .result-window h2{font-size:32px}
+  .result-window .stats{grid-template-columns:1fr;gap:10px}
+  .result-window .stat{padding:14px 16px}
+  .result-window .stat strong{font-size:30px}
+  .result-table-wrap{margin:16px 0;border:0;overflow:visible!important}
+  .result-table{display:block;width:100%!important;min-width:0!important;table-layout:auto!important;border-collapse:separate}
+  .result-table thead{display:none}
+  .result-table tbody{display:grid;gap:12px}
+  .result-table tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;width:100%;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+  .result-table td{display:flex;flex-direction:column;justify-content:center;min-width:0;width:auto!important;padding:10px 12px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);text-align:left;line-height:1.35;overflow-wrap:normal!important;word-break:normal!important;white-space:normal}
+  .result-table td::before{margin-bottom:3px;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+  .result-table td:nth-child(1)::before{content:'#'}
+  .result-table td:nth-child(2)::before{content:'Verbe'}
+  .result-table td:nth-child(3)::before{content:'Sujet'}
+  .result-table td:nth-child(4)::before{content:'Temps'}
+  .result-table td:nth-child(5)::before{content:'Ta réponse'}
+  .result-table td:nth-child(6)::before{content:'Réponse correcte'}
+  .result-table td:nth-child(7)::before{content:'Résultat'}
+  .result-table td:nth-child(2n){border-right:0}
+  .result-table td:nth-child(7){grid-column:1/-1;border-right:0;border-bottom:0}
+  .result-table td:nth-child(5),.result-table td:nth-child(6){border-bottom:0}
+  .result-actions{display:flex;width:100%}
+  .result-actions .btn{width:100%}
+}

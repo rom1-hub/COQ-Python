@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Coq — explorar y practicar vocabulario de francés.">
+  <title>Vocabulario · Coq</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/vocabulary.css?v=20260919-pron">
+</head>
+<body>
+<header class="header"><nav class="nav">
+  <a class="logo" href="../index.html" aria-label="Coq"><img src="../assets/images/coq-logo.jpg" alt="Coq"></a>
+  <div class="navlinks">
+    <a href="../index.html">Inicio</a>
+    <div class="nav-item"><button class="nav-button" type="button">Niveles ▾</button><div class="dropdown">
+      <a href="a1.html">A1</a><a href="#">A2</a><a href="#">B1</a><a href="#">B2</a>
+    </div></div>
+    <a href="conjugaison.html">Conjugación</a>
+    <a href="grammar-possessifs.html">Gramática</a>
+    <a class="active" aria-current="page" href="stage-vocabulario.html">Vocabulario</a>
+    <a href="blog.html">Blog</a>
+  </div>
+  <div class="search-wrap"><label class="search"><span class="search-icon" aria-hidden="true"></span><input id="searchInput" type="search" placeholder="Buscar en Coq…" aria-label="Buscar en Coq"></label><div id="searchResults" class="search-results"></div></div><button class="menu" aria-label="Abrir menú" type="button">☰</button>
+</nav></header>
+<main class="container">
+  <div class="breadcrumb"><a href="../index.html">Inicio</a> / Vocabulario</div>
+  <section class="hero"><span class="eyebrow">Práctica autónoma</span><h1>Vocabulario</h1><p class="lead">Aprende y practica vocabulario de forma sencilla y progresiva. Encuentra palabras, explora diferentes temas y practica lo aprendido mediante ejercicios interactivos.</p></section>
+  <section class="section vocabulary-hub" aria-labelledby="vocab-title">
+    <div class="tabs vocabulary-tabs" role="tablist" aria-label="Modo de vocabulario">
+      <button class="tab active" id="vocabularyLearnTab" type="button" role="tab" aria-selected="true" aria-controls="vocabularyLearnPanel" data-vocabulary-tab="learn">Aprender vocabulario</button>
+      <button class="tab" id="vocabularyPracticeTab" type="button" role="tab" aria-selected="false" aria-controls="vocabularyPracticePanel" data-vocabulary-tab="practice">Practicar vocabulario</button>
+    </div>
+
+    <div class="vocabulary-search-panel">
+      <div class="vocabulary-mode-context" aria-live="polite">
+        <div class="vocabulary-mode-head" data-mode="learn">
+          <div class="section-head">
+            <div><span class="tag">Consulta</span><h2>Aprender vocabulario</h2></div>
+            <p>Busca una palabra o una categoría para aprender y consultar su vocabulario.</p>
+          </div>
+        </div>
+        <div class="vocabulary-mode-head" data-mode="practice">
+          <div class="section-head">
+            <div><span class="tag">Entrenamiento</span><h2>Practicar vocabulario</h2></div>
+            <p>Selecciona una palabra o una categoría para practicar el vocabulario con ejercicios interactivos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mode-note">
+        <strong>Importante:</strong> El vocabulario está organizado en categorías y subcategorías para trabajar grupos reducidos de palabras relacionadas. Puedes buscar una palabra, explorar un tema o seleccionar una subcategoría y después practicarla con los ejercicios. Las palabras de los ejercicios se seleccionan de forma aleatoria y pertenecen únicamente a la subcategoría que estás practicando.
+      </div>
+
+      <div class="vocabulary-controls">
+        <label for="vocabularySearch"></label>
+        <div class="vocabulary-search-row">
+          <div class="vocabulary-search-input-wrap">
+            <input id="vocabularySearch" type="search" autocomplete="off" placeholder="Escribe una palabra en francés o español…" aria-controls="vocabularyResults" aria-expanded="false">
+            <div id="vocabularyResults" class="vocabulary-results" role="listbox" aria-label="Resultados de vocabulario"></div>
+          </div>
+          <button id="vocabularyBrowse" class="btn secondary" type="button" aria-expanded="false" aria-controls="vocabularyTopics">Todas las categorías ▾</button>
+          <button id="vocabularyReset" class="btn secondary" type="button">Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="vocabularyTopics" class="vocabulary-topics vocabulary-topics-panel hidden" aria-label="Categorías y subcategorías"></div>
+
+    <div id="vocabularyLearnPanel" class="vocabulary-tab-panel" role="tabpanel" aria-labelledby="vocabularyLearnTab">
+      <div id="vocabularyLearnContent" class="vocabulary-content" aria-live="polite"></div>
+    </div>
+
+    <div id="vocabularyPracticePanel" class="vocabulary-tab-panel hidden" role="tabpanel" aria-labelledby="vocabularyPracticeTab">
+      <div id="vocabularyExerciseTabs" class="vocabulary-exercise-tabs hidden" role="tablist" aria-label="Ejercicios de vocabulario"></div>
+      <div id="vocabularyPracticeContent" class="vocabulary-content" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+<footer class="footer" id="footer"><div class="footer-grid">
+  <div><div class="logo"><img src="../assets/images/coq-logo.jpg" alt="Coq"></div><p>Apprendre le français · A1 → B2</p><p>Un proyecto creado por École FLE et ELE.</p></div>
+  <div><div class="footer-title">Aprender</div><div class="footer-links"><a href="a1.html">A1</a><a href="#">A2</a><a href="#">B1</a><a href="#">B2</a></div></div>
+  <div><div class="footer-title">Pratiquer</div><div class="footer-links"><a href="conjugaison.html">Conjugación</a><a href="grammar-possessifs.html">Gramática</a><a href="stage-vocabulario.html">Vocabulario</a></div></div>
+  <div><div class="footer-title">Información</div><div class="footer-links"><a href="#">Aviso legal</a><a href="#">Política de privacidad</a><a href="#">Política de cookies</a><a href="https://www.ecole-fle-ele.com/" target="_blank" rel="noopener">Clases de francés online · École FLE et ELE</a></div></div>
+</div></footer>
+<script src="../js/core/navigation.js"></script><script src="../js/core/audio.js?v=20260919-pron"></script><script src="../js/progress/progress.js"></script><script src="../js/exercises/exercise-engine.js"></script><script src="../js/search/search.js"></script><script src="../js/api.js"></script><script src="../data/vocabulary/database.js?v=20260919-7"></script><script src="../js/vocabulary/vocabulary-search.js?v=20260919-arch"></script><script src="../js/vocabulary/vocabulary_adapter.js"></script><script src="../js/vocabulary/vocabulary.js?v=20260919-article"></script>
+</body></html>

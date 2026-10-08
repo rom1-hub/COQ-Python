@@ -1,0 +1,49 @@
+name: Conjugaison regression
+
+# Regression suite for pull requests. Pushes to audit-arquitectura are
+# validated by Build local verb database after regenerating the local DB.
+on:
+  pull_request:
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Run local database regression
+        run: node tests/conjugaison-local-database.node.js
+      - name: Run local database integration regression
+        run: node tests/conjugaison-local-integration.node.js
+      - name: Run canonical data integrity regression
+        run: node tests/conjugaison-canonical-integrity.node.js
+      - name: Run category API regression
+        run: node tests/conjugaison-category-api.node.js
+      - name: Run family inventory regression
+        run: node tests/conjugaison-family-inventory.node.js
+      - name: Run verb-family coverage regression
+        run: node tests/conjugaison-verb-family-coverage.node.js
+      - name: Run category-family coverage regression
+        run: node tests/conjugaison-category-family-coverage.node.js
+      - name: Run family resolver ownership regression
+        run: node tests/conjugaison-family-resolver.node.js
+      - name: Run pattern ownership regression
+        run: node tests/conjugaison-pattern-ownership.node.js
+      - name: Run construction resolver regression
+        run: node tests/conjugaison-construction-resolver.node.js
+      - name: Run auxiliary resolver regression
+        run: node tests/conjugaison-auxiliary-resolver.node.js
+      - name: Run tense rules ownership regression
+        run: node tests/conjugaison-tense-rules.node.js
+      - name: Run subject model regression
+        run: node tests/conjugaison-subject-model.node.js
+      - name: Run conjugaison regression
+        run: node tests/conjugaison-regression.node.js
+      - name: Run simple generation coverage regression
+        run: node tests/conjugaison-simple-generation-coverage.node.js
+      - name: Run practice distribution regression
+        run: node tests/conjugaison-practice-distribution.node.js

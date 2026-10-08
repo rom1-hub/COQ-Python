@@ -1,0 +1,167 @@
+{
+  "être": {
+    "id": "être",
+    "patternId": "être",
+    "groupe": 3
+  },
+  "avoir": {
+    "id": "avoir",
+    "patternId": "avoir",
+    "groupe": 3
+  },
+  "er-regular": {
+    "id": "er-regular",
+    "patternId": "regular-er",
+    "groupe": 1
+  },
+  "er-ger": {
+    "id": "er-ger",
+    "patternId": "er-ger",
+    "groupe": 1
+  },
+  "er-cer": {
+    "id": "er-cer",
+    "patternId": "er-cer",
+    "groupe": 1
+  },
+  "er-e-accent": {
+    "id": "er-e-accent",
+    "patternId": "er-e-accent",
+    "groupe": 1
+  },
+  "er-eler-double": {
+    "id": "er-eler-double",
+    "patternId": "er-eler",
+    "groupe": 1
+  },
+  "er-eler-accent": {
+    "id": "er-eler-accent",
+    "patternId": "er-eler",
+    "groupe": 1
+  },
+  "er-eter-double": {
+    "id": "er-eter-double",
+    "patternId": "er-eter",
+    "groupe": 1
+  },
+  "er-eter-accent": {
+    "id": "er-eter-accent",
+    "patternId": "er-eter",
+    "groupe": 1
+  },
+  "er-eter-orthographic": {
+    "id": "er-eter-orthographic",
+    "patternId": "er-eter",
+    "groupe": 1
+  },
+  "yer-oyer-uyer": {
+    "id": "yer-oyer-uyer",
+    "patternId": "yer",
+    "groupe": 1
+  },
+  "yer-ayer": {
+    "id": "yer-ayer",
+    "patternId": "yer",
+    "groupe": 1
+  },
+  "ir-regular-2": {
+    "id": "ir-regular-2",
+    "patternId": "regular-ir",
+    "groupe": 2
+  },
+  "aller-type": {
+    "id": "aller-type",
+    "patternId": "aller-type",
+    "groupe": 3
+  },
+  "prendre-type": {
+    "id": "prendre-type",
+    "patternId": "prendre",
+    "groupe": 3
+  },
+  "faire-type": {
+    "id": "faire-type",
+    "patternId": "faire",
+    "groupe": 3
+  },
+  "partir-type": {
+    "id": "partir-type",
+    "patternId": "partir-type",
+    "groupe": 3
+  },
+  "suivre-type": {
+    "id": "suivre-type",
+    "patternId": "suivre-type",
+    "groupe": 3
+  },
+  "ouvrir-type": {
+    "id": "ouvrir-type",
+    "patternId": "ouvrir-type",
+    "groupe": 3
+  },
+  "venir-type": {
+    "id": "venir-type",
+    "patternId": "venir-type",
+    "groupe": 3
+  },
+  "tenir-type": {
+    "id": "tenir-type",
+    "patternId": "tenir-type",
+    "groupe": 3
+  },
+  "mettre-type": {
+    "id": "mettre-type",
+    "patternId": "mettre-type",
+    "groupe": 3
+  },
+  "lire-type": {
+    "id": "lire-type",
+    "patternId": "lire-type",
+    "groupe": 3
+  },
+  "rire-type": {
+    "id": "rire-type",
+    "patternId": "rire-type",
+    "groupe": 3
+  },
+  "vivre-type": {
+    "id": "vivre-type",
+    "patternId": "vivre-type",
+    "groupe": 3
+  },
+  "conduire-type": {
+    "id": "conduire-type",
+    "patternId": "conduire-type",
+    "groupe": 3
+  },
+  "courir-type": {
+    "id": "courir-type",
+    "patternId": "courir-type",
+    "groupe": 3
+  },
+  "mourir-type": {
+    "id": "mourir-type",
+    "patternId": "mourir-type",
+    "groupe": 3
+  },
+  "croire-type": {
+    "id": "croire-type",
+    "patternId": "croire-type",
+    "groupe": 3
+  },
+  "recevoir-type": {
+    "id": "recevoir-type",
+    "patternId": "recevoir-type",
+    "groupe": 3
+  },
+  "connaître-type": {
+    "id": "connaître-type",
+    "patternId": "connaître-type",
+    "groupe": 3
+  },
+  "paraître-type": {
+    "id": "paraître-type",
+    "patternId": "paraître-type",
+    "groupe": 3
+  }
+}

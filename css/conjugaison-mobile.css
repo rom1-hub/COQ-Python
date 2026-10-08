@@ -1,0 +1,66 @@
+/* COQ — Ajuste responsive de las tablas de conjugación.
+ * Solo afecta a la vista "Ver una conjugación" en pantallas pequeñas.
+ */
+
+/* Acciones de "Ver un verbo": separación clara y textos en una sola línea. */
+.conj-actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px;
+}
+
+.conj-actions .btn{
+  white-space:nowrap;
+}
+
+@media (max-width:700px){
+  .tense-table{
+    min-width:0;
+    width:100%;
+    table-layout:fixed;
+  }
+
+  .tense-table td{
+    padding:8px 5px;
+    white-space:nowrap;
+  }
+
+  /* Mantener siempre dos columnas visibles: sujeto | conjugación. */
+  .tense-table td:first-child{
+    width:35%;
+    padding-right:10px;
+    text-align:left;
+  }
+
+  .tense-table td:last-child{
+    width:65%;
+    text-align:left;
+  }
+
+  .tense-block{
+    overflow-x:hidden;
+  }
+
+  /* La nota del imperativo debe ocupar toda la tabla y adaptarse a la pantalla. */
+  .tense-table tr:has(td[colspan]) td{
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    line-height:1.4;
+    text-align:left;
+  }
+
+  .conj-actions{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    width:100%;
+  }
+
+  .conj-actions .btn{
+    width:100%;
+    margin:0;
+    white-space:nowrap;
+  }
+}

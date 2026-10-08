@@ -1,0 +1,24 @@
+const fs=require('fs');
+const path=require('path');
+const vm=require('vm');
+const root=path.resolve(__dirname,'..');
+const context=vm.createContext({window:{},console,Object,Array,Math,String,Number,Boolean,RegExp,JSON});
+['data/verbs/tense-rules.js','data/verbs/constructions.js','data/verbs/auxiliaries.js'].forEach(file=>vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file}));
+const w=context.window;
+const assert=(condition,message)=>{if(!condition)throw new Error(message);};
+const expect=(actual,expected,label)=>assert(actual===expected,`${label}: esperado «${expected}», obtenido «${actual}»`);
+const compoundTenses=['passé composé','plus-que-parfait','conditionnel passé','futur antérieur','subjonctif passé'];
+assert(w.COQ_TENSE_RULES&&typeof w.COQ_TENSE_RULES==='object','El catálogo de tiempos debe existir.');
+compoundTenses.forEach(tense=>{
+  const rule=w.COQ_TENSE_RULES[tense];
+  assert(rule&&rule.type==='composé',`${tense}: debe declararse como tiempo compuesto.`);
+  assert(typeof rule.auxiliaireTemps==='string'&&rule.auxiliaireTemps,`${tense}: debe declarar el tiempo del auxiliar.`);
+  expect(rule.participe,'participePasse',`${tense}: debe declarar la fuente del participio`);
+  assert(!Object.prototype.hasOwnProperty.call(rule,'constructionFilters'),`${tense}: no debe declarar filtros de construcción heredados.`);
+  assert(!Object.prototype.hasOwnProperty.call(rule,'auxiliaryFilters'),`${tense}: no debe asumir el catálogo de filtros de auxiliares.`);
+});
+assert(w.COQ_CONSTRUCTION_RESOLVER&&typeof w.COQ_CONSTRUCTION_RESOLVER.matchesConstruction==='function','La resolución de construcción debe pertenecer a constructions.js.');
+assert(w.COQ_AUXILIARY_RESOLVER&&typeof w.COQ_AUXILIARY_RESOLVER.matches==='function','La resolución de auxiliar debe pertenecer a auxiliaries.js.');
+assert(w.COQ_COMPOUND_AUXILIARY_FILTERS&&typeof w.COQ_COMPOUND_AUXILIARY_FILTERS==='object','Los filtros de auxiliar deben pertenecer al dominio Auxiliary.');
+assert(Object.isFrozen(w.COQ_AUXILIARY_OPTIONS),'Las opciones de auxiliar deben ser inmutables.');
+console.log('✓ Tense rules ownership regression passed');

@@ -1,0 +1,59 @@
+{
+  "version": 1,
+
+  "groups": {
+    "infinitive_only": {
+      "exercise": false,
+      "verbs": [
+        "apparoir",
+        "ester",
+        "férir",
+        "quérir",
+        "ravoir",
+        "accroire",
+        "assavoir",
+        "bienvenir",
+        "courre"
+      ]
+    },
+
+    "impersonal": {
+      "exercise": true,
+      "allowed_subjects": [
+        "il"
+      ],
+      "verbs": [
+        "falloir",
+        "pleuvoir",
+        "neiger",
+        "grêler",
+        "bruiner",
+        "venter"
+      ]
+    }
+  },
+
+  "verbs": {
+    "gésir": {
+      "exercise": true,
+      "allowed_tenses": [
+        "présent de l'indicatif",
+        "imparfait"
+      ]
+    },
+
+    "paître": {
+      "exercise": true,
+      "excluded_tenses": [
+        "impératif présent"
+      ]
+    },
+
+    "braire": {
+      "exercise": true,
+      "excluded_tenses": [
+        "impératif présent"
+      ]
+    }
+  }
+}

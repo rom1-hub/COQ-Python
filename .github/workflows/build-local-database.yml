@@ -1,0 +1,52 @@
+name: Build local verb database
+
+on:
+  push:
+    branches: [audit-arquitectura, test-base-datos]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip database]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Build database
+        run: node scripts/build-local-verb-database.js
+      - name: Run regression on generated database
+        run: |
+          node tests/conjugaison-local-database.node.js
+          node tests/conjugaison-local-integration.node.js
+          node tests/conjugaison-canonical-integrity.node.js
+          node tests/conjugaison-category-api.node.js
+          node tests/conjugaison-family-inventory.node.js
+          node tests/conjugaison-verb-family-coverage.node.js
+          node tests/conjugaison-category-family-coverage.node.js
+          node tests/conjugaison-family-resolver.node.js
+          node tests/conjugaison-pattern-ownership.node.js
+          node tests/conjugaison-construction-resolver.node.js
+          node tests/conjugaison-pronominal-agreement-coverage.node.js
+          node tests/conjugaison-auxiliary-resolver.node.js
+          node tests/conjugaison-tense-rules.node.js
+          node tests/conjugaison-subject-model.node.js
+          node tests/conjugaison-regression.node.js
+          node tests/conjugaison-simple-generation-coverage.node.js
+          node tests/conjugaison-practice-distribution.node.js
+      - name: Commit generated database
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/verbs/local-database.js
+          if git diff --cached --quiet; then
+            echo "Database already up to date"
+            exit 0
+          fi
+          git commit -m "Materializa base local de verbos [skip database]"
+          git push

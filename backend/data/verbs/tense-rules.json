@@ -1,0 +1,90 @@
+{
+  "présent de l'indicatif": {
+    "id": "présent de l'indicatif",
+    "type": "simple",
+    "mode": "indicatif",
+    "auxiliaireTemps": null,
+    "participe": null,
+    "order": 10
+  },
+  "impératif présent": {
+    "id": "impératif présent",
+    "type": "simple",
+    "mode": "impératif",
+    "auxiliaireTemps": null,
+    "participe": null,
+    "order": 20
+  },
+  "passé composé": {
+    "id": "passé composé",
+    "type": "composé",
+    "mode": null,
+    "auxiliaireTemps": "présent de l'indicatif",
+    "participe": "participePasse",
+    "order": 30
+  },
+  "imparfait": {
+    "id": "imparfait",
+    "type": "simple",
+    "mode": "indicatif",
+    "auxiliaireTemps": null,
+    "participe": null,
+    "order": 40
+  },
+  "futur simple": {
+    "id": "futur simple",
+    "type": "simple",
+    "mode": "indicatif",
+    "auxiliaireTemps": null,
+    "participe": null,
+    "order": 50
+  },
+  "conditionnel présent": {
+    "id": "conditionnel présent",
+    "type": "simple",
+    "mode": "conditionnel",
+    "auxiliaireTemps": null,
+    "participe": null,
+    "order": 60
+  },
+  "plus-que-parfait": {
+    "id": "plus-que-parfait",
+    "type": "composé",
+    "mode": null,
+    "auxiliaireTemps": "imparfait",
+    "participe": "participePasse",
+    "order": 70
+  },
+  "conditionnel passé": {
+    "id": "conditionnel passé",
+    "type": "composé",
+    "mode": null,
+    "auxiliaireTemps": "conditionnel présent",
+    "participe": "participePasse",
+    "order": 80
+  },
+  "futur antérieur": {
+    "id": "futur antérieur",
+    "type": "composé",
+    "mode": null,
+    "auxiliaireTemps": "futur simple",
+    "participe": "participePasse",
+    "order": 90
+  },
+  "subjonctif présent": {
+    "id": "subjonctif présent",
+    "type": "simple",
+    "mode": "subjonctif",
+    "auxiliaireTemps": null,
+    "participe": null,
+    "order": 100
+  },
+  "subjonctif passé": {
+    "id": "subjonctif passé",
+    "type": "composé",
+    "mode": null,
+    "auxiliaireTemps": "subjonctif présent",
+    "participe": "participePasse",
+    "order": 110
+  }
+}
