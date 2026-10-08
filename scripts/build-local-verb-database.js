@@ -1,3 +1,4 @@
+```javascript
 /* COQ — Construcción de base local de verbos.
  * Fuente: conjugation-fr / Verbiste.
  * La aplicación no consulta la fuente externa en producción.
@@ -17,6 +18,17 @@ const SOURCES_LOCAL=[
 ];
 const SOURCE_PRONOMINAL=path.resolve(__dirname,'../data/verbs/pronominal-catalog.js');
 const OUT=path.resolve(__dirname,'../data/verbs/local-database.js');
+
+const PAST_PARTICIPLE_OVERRIDES=Object.freeze({
+  enfuir:'enfui',
+  fuir:'fui',
+  luire:'lui',
+  nuire:'nui',
+  poindre:'point',
+  reluire:'relui',
+  renaître:'rené'
+});
+
 const SIMPLE={
   "présent de l'indicatif":['indicative','present'],
   'passé simple':['indicative','simple-past'],
@@ -33,6 +45,7 @@ async function getJson(url){
   if(!response.ok)throw new Error(`${url} HTTP ${response.status}`);
   return response.json();
 }
+
 function readLocalMetadata(){
   const window={};
   const merged={};
@@ -43,16 +56,19 @@ function readLocalMetadata(){
   }
   return merged;
 }
+
 function readPronominalCatalog(){
   const window={};
   vm.runInNewContext(fs.readFileSync(SOURCE_PRONOMINAL,'utf8'),{window,console});
   return Array.isArray(window.COQ_PRONOMINAL_CATALOG)?window.COQ_PRONOMINAL_CATALOG:[];
 }
+
 function groupOf(template,verb){
   if(template==='fin:ir')return 2;
   if(/:er$/i.test(String(template||'')) && verb!=='aller')return 1;
   return 3;
 }
+
 function category(verb,group){
   if(group===1){
     if(/ger$/i.test(verb))return 'GER';
@@ -71,11 +87,13 @@ function category(verb,group){
   if(/ir$/i.test(verb))return 'IR_THIRD';
   return 'IRREGULAR';
 }
+
 function familyId(group,cat){
   if(group===1)return ({NORMAL:'er-regular',GER:'er-ger',CER:'er-cer',ELER:'er-eler',ETER:'er-eter',YER:'yer','E_ACUTE_CONSONANT_ER':'er-e-accent'})[cat]||'er-regular';
   if(group===2)return 'ir-regular-2';
   return 'groupe-3';
 }
+
 function variants(value){
   if(value==null)return [];
   if(Array.isArray(value))return value.flatMap(variants);
@@ -88,6 +106,7 @@ function variants(value){
   }
   return [String(value)];
 }
+
 function applyTemplate(verb,template,value){
   const parts=String(template||'').split(':');
   const suffix=parts.length>1?parts.slice(1).join(':'):'';
@@ -95,22 +114,27 @@ function applyTemplate(verb,template,value){
   const stem=suffix&&String(verb).endsWith(suffix)?String(verb).slice(0,-suffix.length):String(verb);
   return forms.map(form=>stem+form);
 }
+
 function bareForm(value){
   const forms=variants(value);
   return String(forms[1]??forms[0]??'');
 }
+
 function reflexivePronoun(index,form){
   const pronouns=['me','te','se','nous','vous','se'];
   const p=pronouns[index]||'se';
   return /^[aeiouyàâäéèêëîïôöùûüÿæœh]/i.test(form)?`${p[0]}'${form}`:`${p} ${form}`;
 }
+
 function pronominalFormList(values){
   return values.map((value,index)=>reflexivePronoun(index,bareForm(value)));
 }
+
 function imperativePronominal(values){
   const pronouns=['toi','nous','vous'];
   return values.slice(0,3).map((value,index)=>`${bareForm(value)}-${pronouns[index]}`);
 }
+
 function makePronominalRecord(base,entry){
   const formes={};
   Object.entries(base.formes||{}).forEach(([label,values])=>{
@@ -134,22 +158,35 @@ function makePronominalRecord(base,entry){
     source:{name:'COQ-pronominal-catalog',base:'COQ local + conjugation-fr',catalog:true}
   };
 }
+
 function normalize(verbs,templates,local,pronominalCatalog){
   const out={};
+
   Object.entries(verbs||{}).forEach(([verb,meta])=>{
     const template=meta?.t;
     const data=templates?.[template];
     if(!data)return;
+
     const group=groupOf(template,verb);
     const aux=Array.isArray(meta?.aux)?meta.aux:[meta?.aux||'avoir'];
     const formes={};
+
     for(const [label,[mode,tense]] of Object.entries(SIMPLE)){
       const rows=data?.[mode]?.[tense];
       if(!Array.isArray(rows)||rows.length<3)continue;
       formes[label]=rows.slice(0,6).map((row)=>applyTemplate(verb,template,row?.i??row)[0]||'');
     }
-    const pp=applyTemplate(verb,template,data?.participle?.['past-participle']?.[0]?.i??data?.participle?.['past-participle']?.[0]??'')[0]||null;
+
+    const pp=applyTemplate(
+      verb,
+      template,
+      data?.participle?.['past-participle']?.[0]?.i
+      ??data?.participle?.['past-participle']?.[0]
+      ??''
+    )[0]||null;
+
     const old=local[verb]||{};
+
     out[verb]={
       ...old,
       id:verb,
@@ -164,7 +201,12 @@ function normalize(verbs,templates,local,pronominalCatalog){
       auxiliaires:old.auxiliaires||aux,
       pronominal:old.pronominal===true,
       construction:old.construction||'non-pronomiale',
-      participePasse:old.participePasse||pp,
+
+      participePasse:
+        PAST_PARTICIPLE_OVERRIDES[verb]
+        ||old.participePasse
+        ||pp,
+
       formes:{...formes,...(old.formes||{})},
       variantes:old.variantes??null,
       exceptions:old.exceptions??null,
@@ -173,15 +215,29 @@ function normalize(verbs,templates,local,pronominalCatalog){
       source:{name:'conjugation-fr',version:VERSION,base:'Verbiste',localMetadata:Boolean(local[verb])}
     };
   });
+
   Object.entries(local).forEach(([verb,record])=>{
     if(!out[verb])out[verb]={...record,source:{name:'COQ-local',localMetadata:true}};
   });
+
   const missing=[];
+
   pronominalCatalog.forEach(entry=>{
     const base=out[entry.base];
-    if(!base){missing.push(entry.base);return;}
-    out[entry.base]={...base,formePronominale:entry.infinitif,formePronominaleDisponible:true};
+
+    if(!base){
+      missing.push(entry.base);
+      return;
+    }
+
+    out[entry.base]={
+      ...base,
+      formePronominale:entry.infinitif,
+      formePronominaleDisponible:true
+    };
+
     const pronominalRecord=makePronominalRecord(base,entry);
+
     out[entry.infinitif]={
       ...pronominalRecord,
       pronominal:true,
@@ -190,6 +246,7 @@ function normalize(verbs,templates,local,pronominalCatalog){
       auxiliaires:['être']
     };
   });
+
   Object.values(out).forEach(record=>{
     if(record?.pronominal===true){
       record.construction='pronomiale';
@@ -197,17 +254,38 @@ function normalize(verbs,templates,local,pronominalCatalog){
       record.auxiliaires=['être'];
     }
   });
+
   if(missing.length)console.warn(`[COQ] Pronominales sin verbo base en la fuente: ${missing.join(', ')}`);
+
   return out;
 }
-function sortObject(value){return Object.fromEntries(Object.keys(value).sort((a,b)=>a.localeCompare(b,'fr')).map(key=>[key,value[key]]));}
+
+function sortObject(value){
+  return Object.fromEntries(
+    Object.keys(value)
+      .sort((a,b)=>a.localeCompare(b,'fr'))
+      .map(key=>[key,value[key]])
+  );
+}
+
 (async()=>{
-  const [verbs,templates]=await Promise.all([getJson(URLS.verbs),getJson(URLS.templates)]);
+  const [verbs,templates]=await Promise.all([
+    getJson(URLS.verbs),
+    getJson(URLS.templates)
+  ]);
+
   const local=readLocalMetadata();
   const pronominalCatalog=readPronominalCatalog();
   const data=sortObject(normalize(verbs,templates,local,pronominalCatalog));
-  const payload=`/* AUTO-GENERATED — do not edit manually. Source: conjugation-fr ${VERSION} / Verbiste + COQ local metadata + pronominal catalog. */\nwindow.COQ_VERBS=${JSON.stringify(data)};\nwindow.COQ_VERB_DATABASE_VERSION=${JSON.stringify(VERSION)};\n`;
+
+  const payload=`/* AUTO-GENERATED — do not edit manually. Source: conjugation-fr ${VERSION} / Verbiste + COQ local metadata + pronominal catalog. */
+window.COQ_VERBS=${JSON.stringify(data)};
+window.COQ_VERB_DATABASE_VERSION=${JSON.stringify(VERSION)};
+`;
+
   fs.mkdirSync(path.dirname(OUT),{recursive:true});
   fs.writeFileSync(OUT,payload,'utf8');
+
   console.log(`Generated ${Object.keys(data).length} verbs at ${OUT}`);
 })();
+```
